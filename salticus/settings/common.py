@@ -1,7 +1,8 @@
 import json
 import os
+from os.path import dirname
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = dirname(dirname(dirname(os.path.abspath(__file__))))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 
 
@@ -13,13 +14,10 @@ try:
         SECRETS = json.load(handle)
 except IOError:
     SECRETS = {
-        'secret_key': 'local-dev-secret-key',
+        'secret_key': 'some-secret-key',
     }
 
 SECRET_KEY = SECRETS.get('secret_key')
-
-
-DEBUG = True
 
 
 ALLOWED_HOSTS = SECRETS.get('allowed_hosts', [])
@@ -28,12 +26,13 @@ ALLOWED_HOSTS = SECRETS.get('allowed_hosts', [])
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
+    'profiles',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -113,19 +112,17 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
+# and Media
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-
-# Media
-
 MEDIA_URL = '/media/'
 
+X_FRAME_OPTIONS = 'DENY'
+CSRF_COOKIE_HTTPONLY = True
 
-# Media and Static Roots
-
-MEDIA_ROOT = os.path.join(DATA_DIR, 'media_root')
-STATIC_ROOT = os.path.join(DATA_DIR, 'static_root')
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
