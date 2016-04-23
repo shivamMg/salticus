@@ -1,7 +1,8 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 
 from users import views as user_views
+from profiles import views as profile_views
 
 urlpatterns = [
     url(
@@ -22,4 +23,6 @@ urlpatterns = [
         name='signup',
     ),
     url(r'^account/$', user_views.account, name='account'),
+    url(r'^profiles/', include('profiles.urls', namespace='profiles')),
+    url(r'^p/(?P<handle>.+)/$', profile_views.view_profile, name='view_profile'),
 ]

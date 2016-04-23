@@ -1,3 +1,12 @@
 .midnight-bg {
   background-color: #2b1b17 !important;
 }
+
+.upper-margin {
+  margin-top: 6em !important;
+}
+
+.field-error {
+  font-size: 10px;
+  color: #b71c1c;
+}
