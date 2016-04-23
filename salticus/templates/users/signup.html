@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+<style>
+  body > .grid {
+    height: 100%;
+  }
+  .column {
+    max-width: 700px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+
+<form class="ui form {% if form.errors %}error{% endif %}" method="post" action="{% url 'signup' %}">
+{% csrf_token %}
+
+  <div class="ui segment left aligned">
+    <h2 class="ui dividing header">Sign up for an account</h2><br>
+
+    <div class="ui grid">
+    {% for field in form %}
+      {% if field.errors %}
+        <div class="eight wide field error">
+          {{ field.label_tag }}
+          <span style="font-size:10px;">{{ field.errors.as_text }}</span>
+          {{ field }}
+        </div>
+      {% else %}
+        <div class="eight wide field">
+          {{ field.label_tag }}
+          {{ field }}
+        </div>
+      {% endif %}
+    {% endfor %}
+
+      <div class="eight wide field">
+        <button class="ui primary fluid button" type="submit">Signup</button>
+      </div><br>
+    </div>
+  </div>
+
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+  </div>
+</div>
+
+{% endblock %}

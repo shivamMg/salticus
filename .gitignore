@@ -8,3 +8,6 @@ venv/
 
 # Data directory
 data/
+
+# Bower Components
+lib/
