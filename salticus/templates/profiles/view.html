@@ -1,8 +1,27 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block content %}
-<div class="ui container upper-margin">
-{{ profile.handle }}
-{{ profile.full_name }}
+<div class="ui container centered stackable grid upper-margin">
+  <div class="eight wide column">
+    <div class="ui segment">
+      <img class="ui small left floated image" src="{{ profile.profile_photo.url }}" alt="{{ profile.handle }}">
+      <span class="ui large header grey">{{ profile.full_name }}</span><br>
+      <a class="ui blue large header" href="{% url 'about_profile:index' profile.handle %}">@{{ profile.handle }}</a>
+      <br>
+      <div class="ui medium header">{{ profile.short_description }}</div>
+      <div class="markdown">{{ profile.long_description }}</div>
+    </div>
+  </span>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'lib/showdown/dist/showdown.min.js' %}"></script>
+<script type="text/javascript">
+  var showdownConverter = new showdown.Converter();
+  $(".markdown").each(function () {
+    $(this).html(showdownConverter.makeHtml($(this).text()));
+  });
+</script>
 {% endblock %}
