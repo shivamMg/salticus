@@ -1,0 +1,8 @@
+{% extends 'profiles/profile_form.html' %}
+
+{% block form_header %}Edit Profile{% endblock %}
+{% block form_submit_text %}Update{% endblock %}
+
+{% block profile_photo_preview_img %}
+  <img class="ui fluid image" src="{{ form.instance.profile_photo.url }}">
+{% endblock %}

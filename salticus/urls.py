@@ -1,8 +1,9 @@
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
 
 from users import views as user_views
-from profiles import views as profile_views
+from .settings.dev import MEDIA_URL, MEDIA_ROOT
 
 urlpatterns = [
     url(
@@ -23,6 +24,8 @@ urlpatterns = [
         name='signup',
     ),
     url(r'^account/$', user_views.account, name='account'),
-    url(r'^profiles/', include('profiles.urls', namespace='profiles')),
-    url(r'^p/(?P<handle>.+)/$', profile_views.view_profile, name='view_profile'),
-]
+    url(r'^profiles/', include('profiles.urls.create',
+                               namespace='create_profile')),
+    url(r'^p/(?P<handle>[-\w]+)/', include('profiles.urls.about',
+                                        namespace='about_profile')),
+] + static(MEDIA_URL, document_root=MEDIA_ROOT)

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'apps/profiles/profile-form.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'apps/profiles/profile-form.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="ui container upper-margin">
+  <div class="ui segment">
+    <form class="ui equal width form {% if form.errors %}error{% endif %}" method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div style="padding-bottom:30px;">
+        <h2 class="ui left floated header">{% block form_header %}{% endblock %}</h2>
+        <button class="ui right floated button" type="submit">{% block form_submit_text %}{% endblock %}</button>
+      </div>
+      <div class="ui divider"></div>
+
+      <div class="fields">
+        <div class="field">
+          <div class="field">
+            <div class="field">
+              {{ form.profile_photo.label_tag }}
+              {% if form.profile_photo.errors %}<span class="field-error">{{ form.profile_photo.errors.as_text }}</span>{% endif %}
+              {{ form.profile_photo }}
+
+              <ul class="ui list padded">
+                <li class="item">Use square image</li>
+                <li class="item">Image should at least be 300x300 pixels</li>
+              </ul>
+            </div>
+            <div class="field" id="profile_photo_preview">
+              {% block profile_photo_preview_img %}{% endblock %}
+            </div>
+          </div>
+          {% comment 'Header Photo' %}
+          <div class="field">
+            {{ form.header_photo.label_tag }}
+            {% if form.header_photo.errors %}<span class="field-error">{{ form.header_photo.errors.as_text }}</span>{% endif %}
+            {{ form.header_photo }}
+          </div>
+          {% endcomment %}
+        </div>
+        <div class="field">
+          <div class="two fields">
+            <div class="field">
+              {{ form.handle.label_tag }}
+              {% if form.handle.errors %}<span class="field-error">{{ form.handle.errors.as_text }}</span>{% endif %}
+              {{ form.handle }}
+            </div>
+            <div class="field">
+              {{ form.full_name.label_tag }}
+              {% if form.full_name.errors %}<span class="field-error">{{ form.full_name.errors.as_text }}</span>{% endif %}
+              {{ form.full_name }}
+            </div>
+          </div>
+          <div class="field">
+            {{ form.short_description.label_tag }}
+            {% if form.short_description.errors %}<span class="field-error">{{ form.short_description.errors.as_text }}</span>{% endif %}
+            {{ form.short_description }}
+          </div>
+          <div class="field">
+            {{ form.long_description.label_tag }}
+            {% if form.long_description.errors %}<span class="field-error">{{ form.long_description.errors.as_text }}</span>{% endif %}
+            {{ form.long_description }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
