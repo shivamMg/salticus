@@ -13,27 +13,12 @@
     {% block stylesheets %}{% endblock %}
   </head>
   <body>
-    <div class="navbar">
-      <div class="ui midnight-bg inverted large fixed menu">
-        <div class="ui container">
-          <a href="/" class="item header">salticus</a>
-          <a href="/" class="item">Item</a>
+    {% include 'navbar.html' %}
 
-          <div class="right menu">
-          {% if user.is_authenticated %}
-            <a href="{% url 'account' %}" class="item">{{ user.username }}</a>
-            <a href="{% url 'logout' %}" class="item">Logout</a>
-          {% else %}
-            <a href="{% url 'signup' %}" class="item">Signup</a>
-            <a href="{% url 'login' %}" class="item">Login</a>
-          {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
     {% block content %}{% endblock %}
 
-    <div class="footer"></div>
+    {% include 'footer.html' %}
+
     <script type="text/javascript" src="{% static 'lib/jquery/dist/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'lib/semantic/dist/semantic.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>

@@ -3,10 +3,15 @@
 }
 
 .upper-margin {
-  margin-top: 6em !important;
+  margin-top: 4em !important;
 }
 
 .field-error {
   font-size: 10px;
   color: #b71c1c;
+}
+
+.ui.footer.segment {
+  margin: 5em 0em 0em;
+  padding: 5em 0em;
 }

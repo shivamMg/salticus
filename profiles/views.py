@@ -11,7 +11,7 @@ from users.models import User
 
 
 def index(request, handle):
-    return render(request, 'profiles/view.html', {
+    return render(request, 'profiles/index.html', {
         'profile': Profile.objects.get(handle=handle),
     })
 
