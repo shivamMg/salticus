@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'apps/promises/promise-form.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'apps/promises/promise-form.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="ui centered stackable grid upper-margin">
+<div class="ten wide computer column">
+  <div class="ui segment">
+    <form class="ui equal width form" method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div style="padding-bottom:30px;">
+        <h2 class="ui left floated header">{% block form_header %}{% endblock %}</h2>
+        <button class="ui right floated button" type="submit">{% block form_submit_text %}{% endblock %}</button>
+      </div>
+      <div class="ui divider"></div>
+
+      <div class="field">
+        {{ form.title.label_tag }}
+        {% if form.title.errors %}<span class="field-error">{{ form.title.errors.as_text }}</span>{% endif %}
+        {{ form.title }}
+      </div>
+      <div class="field">
+        {{ form.description.label_tag }}
+        {% if form.description.errors %}<span class="field-error">{{ form.description.errors.as_text }}</span>{% endif %}
+        {{ form.description }}
+      </div>
+      <div class="fields">
+        <div class="field">
+          {{ form.source_link.label_tag }}
+          {% if form.source_link.errors %}<span class="field-error">{{ form.source_link.errors.as_text }}</span>{% endif %}
+          {{ form.source_link }}
+        </div>
+        <div class="field">
+          {{ form.source_file.label_tag }}
+          {% if form.source_file.errors %}<span class="field-error">{{ form.source_file.errors.as_text }}</span>{% endif %}
+          {{ form.source_file }}
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+{% endblock %}

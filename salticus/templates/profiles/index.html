@@ -4,6 +4,7 @@
 {% block content %}
 <div class="upper-margin"></div>
 <div class="ui stackable grid padded">
+  <!-- Mobile and Tablet only -->
   <div class="sixteen wide mobile only sixteen wide tablet only column">
     <div class="ui segment" style="min-height:180px;">
       <img class="ui small rounded left floated image" src="{{ profile.profile_photo.url }}" alt="{{ profile.handle }}">
@@ -13,6 +14,8 @@
       <a href="{% url 'about_profile:about' handle=profile.handle %}">Read More</a>
     </div>
   </div>
+
+
   <div class="sixteen wide mobile twelve wide computer column">
     <div class="ui segment">
       <div class="column">
@@ -25,6 +28,9 @@
       </div>
     </div>
   </div>
+
+
+  <!-- Computer only -->
   <div class="computer only four wide column">
     <div class="ui segment">
       <div class="column">
