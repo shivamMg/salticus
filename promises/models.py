@@ -18,7 +18,7 @@ class Promise(models.Model):
 
     def get_absolute_url(self):
         base36_id = int_to_base36(self.id)
-        return '/p/{}/promises/{}'.format(self.profile.handle, base36_id)
+        return '/p/{}/promise/{}'.format(self.profile.handle, base36_id)
 
     def __str__(self):
         return self.title[:80]

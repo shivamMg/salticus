@@ -9,9 +9,9 @@
     <div class="ui segment" style="min-height:180px;">
       <img class="ui small rounded left floated image" src="{{ profile.profile_photo.url }}" alt="{{ profile.handle }}">
       <span class="ui large header grey">{{ profile.full_name }}</span><br>
-      <a class="ui blue large header" href="{% url 'about_profile:index' profile.handle %}">@{{ profile.handle }}</a><br>
+      <a class="ui blue large header" href="{% url 'profile:index' profile.handle %}">/p/{{ profile.handle }}</a><br>
       <div class="ui medium header">{{ profile.short_description }}</div>
-      <a href="{% url 'about_profile:about' handle=profile.handle %}">Read More</a>
+      <a href="{% url 'profile:about' handle=profile.handle %}">Read More</a>
     </div>
   </div>
 
@@ -38,7 +38,7 @@
       </div>
       <div class="column">
         <span class="ui large header grey">{{ profile.full_name }}</span><br>
-        <a class="ui blue large header" href="{% url 'about_profile:index' profile.handle %}">@{{ profile.handle }}</a><br>
+        <a class="ui blue large header" href="{% url 'profile:index' profile.handle %}">/p/{{ profile.handle }}</a><br>
         <div class="ui medium header">{{ profile.short_description }}</div>
       </div>
       <div class="column">

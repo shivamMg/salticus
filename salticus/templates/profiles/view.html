@@ -7,7 +7,7 @@
     <div class="ui segment">
       <img class="ui small left floated image" src="{{ profile.profile_photo.url }}" alt="{{ profile.handle }}">
       <span class="ui large header grey">{{ profile.full_name }}</span><br>
-      <a class="ui blue large header" href="{% url 'about_profile:index' profile.handle %}">@{{ profile.handle }}</a>
+      <a class="ui blue large header" href="{% url 'profile:index' profile.handle %}">/p/{{ profile.handle }}</a>
       <br>
       <div class="ui medium header">{{ profile.short_description }}</div>
       <div class="markdown">{{ profile.long_description }}</div>
