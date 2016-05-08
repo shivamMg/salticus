@@ -1,5 +1,5 @@
 <div class="navbar">
-  <div class="ui midnight-bg inverted large fixed menu">
+  <div class="ui white small fixed menu">
     <div class="ui container">
       <a href="/" class="item header">salticus</a>
       <a href="/" class="item">Item</a>
@@ -7,10 +7,14 @@
       <div class="right menu">
       {% if user.is_authenticated %}
         <a href="{% url 'account' %}" class="item">{{ user.username }}</a>
-        <a href="{% url 'logout' %}" class="item">Logout</a>
+        <div class="item">
+          <a href="{% url 'logout' %}" class="ui button">Logout</a>
+        </div>
       {% else %}
         <a href="{% url 'signup' %}" class="item">Signup</a>
-        <a href="{% url 'login' %}" class="item">Login</a>
+        <div class="item">
+          <a href="{% url 'login' %}" class="ui primary button">Login</a>
+        </div>
       {% endif %}
       </div>
     </div>

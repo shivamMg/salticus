@@ -25,6 +25,7 @@ class UserManager(BaseUserManager):
             password=password
         )
         user.is_superuser = True
+        user.is_admin = True
         user.save(using=self._db)
         return user
 
@@ -36,7 +37,7 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=15, blank=True)
 
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'
@@ -55,4 +56,5 @@ class User(AbstractBaseUser):
 
     @property
     def is_staff(self):
-        return self.is_staff
+        """User belongs to staff if he is an admin"""
+        return self.is_admin

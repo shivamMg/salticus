@@ -6,38 +6,38 @@
     height: 100%;
   }
   .column {
-    max-width: 700px;
+    max-width: 400px;
   }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="ui middle aligned center aligned grid">
+<div class="ui middle aligned center aligned grid upper-margin">
   <div class="column">
 
-<form class="ui form {% if form.errors %}error{% endif %}" method="post" action="{% url 'signup' %}">
+<form class="ui form" method="post" action="{% url 'signup' %}">
 {% csrf_token %}
 
   <div class="ui segment left aligned">
     <h2 class="ui dividing header">Sign up for an account</h2><br>
 
-    <div class="ui grid">
+    <div class="">
     {% for field in form %}
       {% if field.errors %}
-        <div class="eight wide field error">
+        <div class="field error">
           {{ field.label_tag }}
           <span style="font-size:10px;">{{ field.errors.as_text }}</span>
           {{ field }}
         </div>
       {% else %}
-        <div class="eight wide field">
+        <div class="field">
           {{ field.label_tag }}
           {{ field }}
         </div>
       {% endif %}
     {% endfor %}
 
-      <div class="eight wide field">
+      <div class="field">
         <button class="ui primary fluid button" type="submit">Signup</button>
       </div><br>
     </div>

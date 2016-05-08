@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.generic.edit import UpdateView
 from django.views.generic import DetailView
 
@@ -17,6 +17,8 @@ def index(request, handle):
 
 
 @login_required
+# Only Admins can create a Profile
+@user_passes_test(lambda u: u.is_admin)
 def create_profile(request):
     if request.method == 'GET':
         form = ProfileForm()
@@ -48,8 +50,5 @@ class EditProfile(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = ProfileForm
 
     def test_func(self):
-        """User must be the creator of the profile"""
-        profile_creator = Profile.objects.get(
-            handle=self.kwargs['handle']).creator
-        user = self.request.user
-        return user == profile_creator
+        """User must be a staff member"""
+        return self.request.user.is_staff
