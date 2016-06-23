@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 from users import views as user_views
 from .settings.dev import MEDIA_URL, MEDIA_ROOT
@@ -33,4 +34,7 @@ urlpatterns = [
     # A Profile
     url(r'^p/(?P<handle>[-\w]+)/', include('profiles.urls.profile',
                                            namespace='profile')),
+
+    # Homepage
+    url(r'^$', TemplateView.as_view(template_name='homepage.html'), name='homepage'),
 ] + static(MEDIA_URL, document_root=MEDIA_ROOT)

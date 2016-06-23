@@ -1,5 +1,21 @@
+body {
+  background-color: #f6f0ee;
+}
+
+a:hover {
+  color: #2b1b17;
+}
+
 .midnight-bg {
   background-color: #2b1b17 !important;
+}
+
+.ui.primary.button {
+  background-color: #422a24;
+}
+
+.ui.primary.button:hover {
+  background-color: #2b1b17;
 }
 
 .upper-margin {
