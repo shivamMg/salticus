@@ -1,7 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import UserCreationForm
+from .models import User
+from .forms import UserCreationForm, UserChangeForm
 
 
 def signup(request):
@@ -19,5 +22,11 @@ def signup(request):
     )
 
 
-def account(request):
-    return render(request, 'users/account.html')
+
+class AccountInfo(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = 'users/account.html'
+    form_class = UserChangeForm
+
+    def get_object(self):
+        return self.request.user

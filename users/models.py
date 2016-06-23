@@ -35,6 +35,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=15, blank=True)
     last_name = models.CharField(max_length=15, blank=True)
+    bio = models.TextField(max_length=200, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -44,6 +45,9 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['email']
 
     objects = UserManager()
+
+    def get_absolute_url(self):
+        return '/account/'
 
     def get_full_name(self):
         return '{} {}'.format(self.first_name, self.last_name)

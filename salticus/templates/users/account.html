@@ -1,5 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="ui container upper-margin">
+  <div class="ui segment">
+    <form class="ui equal width form" method="post" action="">
+    {% csrf_token %}
+      <div style="padding-bottom:30px;">
+        <h2 class="ui left floated header">Account Info</h2>
+        <button class="ui right floated button" type="submit">Update</button>
+      </div>
+      <div class="ui divider"></div>
 
+      {% for field in form %}
+        {% if field.errors %}
+          <div class="field error">
+            {{ field.label_tag }}
+            <span style="font-size:10px;">{{ field.errors.as_text }}</span>
+            {{ field }}
+          </div>
+        {% else %}
+          <div class="field">
+            {{ field.label_tag }}
+            {{ field }}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+    </form>
+  </div>
+</div>
 {% endblock %}

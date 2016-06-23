@@ -24,7 +24,7 @@ urlpatterns = [
         user_views.signup,
         name='signup',
     ),
-    url(r'^account/$', user_views.account, name='account'),
+    url(r'^account/$', user_views.AccountInfo.as_view(), name='account'),
 
     # Profiles
     url(r'^profiles/', include('profiles.urls.profiles',
