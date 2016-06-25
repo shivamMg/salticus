@@ -34,12 +34,12 @@
       {% endif %}
   {% endif %}
 
-  <h2>Log in to your account</h2>
-
   <form class="ui form" method="post" action="{% url 'login' %}">
   {% csrf_token %}
 
     <div class="ui segment left aligned">
+      <h2 class="ui dividing header">Login</h2>
+
       <div class="field">
           {{ form.username.label_tag }}
           {{ form.username }}

@@ -19,32 +19,29 @@
 {% csrf_token %}
 
   <div class="ui segment left aligned">
-    <h2 class="ui dividing header">Sign up for an account</h2><br>
+    <h2 class="ui dividing header">Sign up for an account</h2>
 
     <div class="">
     {% for field in form %}
-      {% if field.errors %}
-        <div class="field error">
-          {{ field.label_tag }}
-          <span style="font-size:10px;">{{ field.errors.as_text }}</span>
-          {{ field }}
-        </div>
-      {% else %}
-        <div class="field">
-          {{ field.label_tag }}
-          {{ field }}
-        </div>
-      {% endif %}
+      <div class="field">
+        {{ field.label_tag }}
+        <span class="field-error">{{ field.errors.as_text }}</span>
+        {{ field }}
+      </div>
     {% endfor %}
 
       <div class="field">
         <button class="ui primary fluid button" type="submit">Signup</button>
-      </div><br>
+      </div>
     </div>
   </div>
 
   <input type="hidden" name="next" value="{{ next }}" />
 </form>
+
+<div class="ui info message">
+  Already have an account? Login <a href="{% url 'login' %}">here</a>.
+</div>
 
   </div>
 </div>
