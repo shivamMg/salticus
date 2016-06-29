@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'users',
     'profiles',
     'promises',
+    'countries',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+from countries.models import Country
+
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password):
@@ -30,6 +32,8 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=15, blank=True)
     last_name = models.CharField(max_length=15, blank=True)
     bio = models.TextField(max_length=200, blank=True)
+
+    country = models.ForeignKey(Country)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

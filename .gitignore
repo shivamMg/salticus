@@ -6,8 +6,11 @@ __pycache__/
 venv/
 .env
 
-# Data directory
-data/
+# Local Configuration
+conf/
+
+# Media Root
+media_root/
 
 # Bower Components
 lib/
