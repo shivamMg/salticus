@@ -27,6 +27,16 @@ a:hover {
   color: #b71c1c;
 }
 
+.navbar > .ui.menu > .ui.selection.dropdown {
+  border: 0px;
+  border-radius: 0px;
+  min-width: 17em;
+}
+
+.navbar > .ui.menu > .ui.selection.dropdown .menu {
+  max-height: 20rem;
+}
+  
 .ui.footer.segment {
   margin: 5em 0em 0em;
   padding: 5em 0em;

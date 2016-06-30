@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Continent(models.Model):
-    code = models.CharField(max_length=2)
+    code = models.CharField(max_length=2, unique=True)
     name = models.CharField(max_length=20)
 
     def __str__(self):
@@ -10,7 +10,7 @@ class Continent(models.Model):
 
 
 class Country(models.Model):
-    code = models.CharField(max_length=2)
+    code = models.CharField(max_length=2, unique=True)
     name = models.CharField(max_length=50)
     continent = models.ForeignKey(Continent)
 

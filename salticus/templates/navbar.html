@@ -1,8 +1,19 @@
+{% load countries_dropdown %}
+
 <div class="navbar">
   <div class="ui white small menu">
 
       <a href="/" class="item header">salticus</a>
-      <a href="/" class="item">Item</a>
+      <div class="ui selection dropdown item">
+        <input type="hidden" name="country">
+        <div class="text">
+          <i class="in flag"></i>India
+        </div>
+
+        <div class="menu">
+          {% list_countries %}
+        </div>
+      </div>
 
       <div class="right menu">
       {% if user.is_authenticated %}
