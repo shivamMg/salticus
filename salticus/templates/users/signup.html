@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load countries_dropdown %}
 
 {% block stylesheets %}
 <style>
@@ -26,7 +27,18 @@
       <div class="field">
         {{ field.label_tag }}
         <span class="field-error">{{ field.errors.as_text }}</span>
-        {{ field }}
+        {% if field.name == 'country' %}
+          <div class="ui fluid search selection dropdown">
+            {{ field }}
+            <i class="dropdown icon"></i>
+            <div class="default text">Your Country</div>
+            <div class="menu">
+              {% list_countries %}
+            </div>
+          </div>
+        {% else %}
+          {{ field }}
+        {% endif %}
       </div>
     {% endfor %}
 

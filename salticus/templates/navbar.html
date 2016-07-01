@@ -7,7 +7,11 @@
       <div class="ui selection dropdown item">
         <input type="hidden" name="country">
         <div class="text">
+        {% if user.is_authenticated %}
+          <i class="{{ user.country.code | lower }} flag"></i>{{ user.country.name }}
+        {% else %}
           <i class="in flag"></i>India
+        {% endif %}
         </div>
 
         <div class="menu">

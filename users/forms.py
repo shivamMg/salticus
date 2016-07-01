@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from countries.models import Country
 from .models import User
 
 
@@ -8,10 +9,11 @@ class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password Confirmation',
                                 widget=forms.PasswordInput)
+    country = forms.CharField(label='Country', widget=forms.HiddenInput)
 
     class Meta:
         model = User
-        fields = ('username', 'email',)
+        fields = ('username', 'email')
         labels = {
             'username': _('Username'),
             'email': _('Email'),
@@ -24,8 +26,17 @@ class UserCreationForm(forms.ModelForm):
             raise forms.ValidationError("Passwords don't match")
         return password2
 
+    def clean_country(self):
+        country_code = self.cleaned_data.get('country')
+        try:
+            country = Country.objects.get(code=country_code)
+        except Country.DoesNotExist:
+            raise forms.ValidationError('No such country')
+        return country
+
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
+        user.country = self.clean_country()
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
@@ -33,9 +44,11 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
+    country = forms.CharField(label='Country', widget=forms.HiddenInput)
+
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'bio',)
+        fields = ('username', 'email', 'first_name', 'last_name', 'bio')
         labels = {
             'username': _('Username'),
             'email': _('Email'),
@@ -43,3 +56,18 @@ class UserChangeForm(forms.ModelForm):
             'last_name': _('Last Name'),
             'bio': _('Bio'),
         }
+
+    def clean_country(self):
+        country_code = self.cleaned_data.get('country')
+        try:
+            country = Country.objects.get(code=country_code)
+        except Country.DoesNotExist:
+            raise forms.ValidationError('No such country')
+        return country
+
+    def save(self, commit=True):
+        user = super(UserChangeForm, self).save(commit=False)
+        user.country = self.clean_country()
+        if commit:
+            user.save()
+        return user

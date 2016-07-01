@@ -5,20 +5,24 @@ from countries.models import Country
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, email, password):
+    def create_user(self, username, email, country, password):
         if not username:
             raise ValueError('User must have a username')
         if not email:
             raise ValueError('User must have an email')
+        if not country:
+            raise ValueError('User must have a country')
 
         user = self.model(username=username, email=self.normalize_email(email))
         user.set_password(password)
+        user.country = Country.objects.get(pk=country)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, email, password):
+    def create_superuser(self, username, email, country, password):
         user = self.create_user(username=username,
                                 email=email,
+                                country=country,
                                 password=password)
         user.is_superuser = True
         user.is_admin = True
@@ -40,7 +44,7 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['email', 'country']
 
     objects = UserManager()
 

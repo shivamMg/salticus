@@ -1,5 +1,5 @@
 {% for country in countries %}
-  <div class="item" data-value="{{ country.code | lower }}" title="{{ country.name }}, {{ country.continent.name }}">
+  <div class="item" data-value="{{ country.code }}" title="{{ country.name }}, {{ country.continent.name }}">
     <i class="{{ country.code | lower }} flag"></i>{{ country.name | truncatechars:20 }}
   </div>
 {% endfor %}
